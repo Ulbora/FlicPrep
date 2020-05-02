@@ -1,7 +1,6 @@
 package flicprep
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -19,14 +18,12 @@ func (p *FlicPrep) PrepRecords(files *fr.CsvFiles) *[]Flic {
 	var rtn []Flic
 	p.flicMap = make(map[string]Flic)
 	if files != nil {
-		fmt.Println("csv len: ", len(files.CsvFileList))
+		//fmt.Println("csv len: ", len(files.CsvFileList))
 		for i, cf := range files.CsvFileList {
 			if i == 0 {
-				fmt.Println("csv rec: ", cf)
 				continue
 			}
 			// fmt.Println("csv rec: ", cf)
-			//var flic Flic
 			if cf[3] == "01" || cf[3] == "02" || cf[3] == "07" {
 				var key = cf[8] + cf[9] + cf[10]
 				key = strings.Replace(key, " ", "", -1)
@@ -45,29 +42,24 @@ func (p *FlicPrep) PrepRecords(files *fr.CsvFiles) *[]Flic {
 
 						}
 					}
-
 				} else {
 					suc, newflic := p.parseRecord(cf)
 					//fmt.Println("newflic: ", newflic)
 					if suc {
 						p.flicMap[key] = newflic
 					}
-					// newflic := p.parseRecord(cf)
-					// //fmt.Println("flic: ", newflic)
-					// p.flicMap[key] = newflic
 				}
-				//var flic Flic
-
 			}
 		}
 
-		fmt.Println("map len: ", len(p.flicMap))
+		//fmt.Println("map len: ", len(p.flicMap))
 		for _, v := range p.flicMap {
 			rtn = append(rtn, v)
 		}
-		fmt.Println("rtn len: ", len(rtn))
+		//fmt.Println("rtn len: ", len(rtn))
 		// fmt.Println("rtn 1: ", rtn[0])
 		// fmt.Println("rtn 2: ", rtn[20])
+		//fmt.Println("rtn: ", rtn)
 	}
 
 	return &rtn
@@ -80,6 +72,7 @@ func (p *FlicPrep) parseRecord(cf []string) (bool, Flic) {
 	rtn.Key = key
 	//fmt.Println("key: ", key)
 	lic := p.buildLic(cf)
+	//fmt.Println("license no:", lic)
 	rtn.Lic = lic
 	fty, _ := strconv.Atoi(cf[3])
 	rtn.Type = fty
@@ -156,7 +149,6 @@ func (p *FlicPrep) buildLic(cf []string) string {
 	} else {
 		lic += (cf[5])
 	}
-
 	return lic
 }
 

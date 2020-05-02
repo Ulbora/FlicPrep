@@ -18,7 +18,9 @@ func TestFlicPrep_PrepRecords(t *testing.T) {
 	fmt.Println("csv err: ", rec.CsvReadErr)
 	fmt.Println("csv len: ", len(rec.CsvFileList))
 	var fp FlicPrep
-	recs := fp.PrepRecords(rec)
+	fpi := fp.GetNew()
+	recs := fpi.PrepRecords(rec)
+	fmt.Println("Flic len: ", len(*recs))
 	if len(*recs) == 0 {
 		t.Fail()
 	}
