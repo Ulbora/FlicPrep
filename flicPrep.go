@@ -79,6 +79,9 @@ func (p *FlicPrep) parseRecord(cf []string) (bool, Flic) {
 	rtn.LicName = cf[6]
 	rtn.BusName = cf[7]
 	rtn.PremiseAddress = cf[8] + "\n" + cf[9] + ", " + cf[10] + " " + cf[11]
+	rtn.Address = cf[8]
+	rtn.City = cf[9]
+	rtn.State = cf[10]
 	rtn.PremiseZip = cf[11]
 	// fmt.Println("prim address:")
 	// fmt.Println(rtn.PremiseAddress)

@@ -15,6 +15,9 @@ type Flic struct {
 	LicName        string
 	BusName        string
 	PremiseAddress string
+	Address        string
+	City           string
+	State          string
 	PremiseZip     string
 	MailingAddress string
 	Phone          string
